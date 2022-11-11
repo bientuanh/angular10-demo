@@ -1,0 +1,46 @@
+image: node:14
+
+# Cache modules for each branch
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+stages:
+  - lint
+  - build
+  - deploy
+
+lint:
+  stage: lint
+  script:
+    - yarn
+    - yarn branch-lint
+  only:
+    - merge_requests
+    - master
+    - tags
+
+build:
+  stage: build
+  script:
+    - yarn
+    - CI=false npm run build
+  artifacts:
+    paths:
+      - dist/
+  only:
+    - merge_requests
+    - master
+    - tags
+
+deploy:
+  stage: deploy
+  script:
+    - yarn global add netlify-cli
+    - netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod
+  dependencies:
+    - build
+  only:
+    - tags
+    - master

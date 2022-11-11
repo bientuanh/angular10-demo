@@ -1,0 +1,226 @@
+<div style="margin-top: 100px" class="profile-form-container">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <h1>Profile Form</h1>
+
+    <mat-form-field appearance="fill">
+      <mat-label for="first-name">First Name: </mat-label>
+      <input matInput id="first-name" type="text" formControlName="firstName" />
+    </mat-form-field>
+    <div
+      *ngIf="
+        profileForm.get('firstName')?.invalid &&
+        (profileForm.get('firstName')?.dirty || profileForm.get('firstName')?.touched)
+      "
+      class="form-error"
+    >
+      <div *ngIf="profileForm.get('firstName')?.hasError('required')">First name is required.</div>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label for="last-name">Last Name: </mat-label>
+      <input matInput id="last-name" type="text" formControlName="lastName" />
+    </mat-form-field>
+    <div
+      *ngIf="
+        profileForm.get('lastName')?.invalid &&
+        (profileForm.get('lastName')?.dirty || profileForm.get('lastName')?.touched)
+      "
+      class="form-error"
+    >
+      <div *ngIf="profileForm.get('lastName')?.hasError('required')">Last name is required.</div>
+    </div>
+
+    <div formGroupName="address" class="profile-form__address">
+      <h2>Address</h2>
+
+      <mat-form-field appearance="fill">
+        <mat-label for="street">Street: </mat-label>
+        <input matInput id="street" type="text" formControlName="street" />
+      </mat-form-field>
+      <div
+        *ngIf="
+          profileForm.get('address')?.get('street').invalid &&
+          (profileForm.get('address')?.get('street').dirty ||
+            profileForm.get('address')?.get('street').touched)
+        "
+        class="form-error"
+      >
+        <div *ngIf="profileForm.get('address')?.get('street').hasError('required')">
+          Street is required.
+        </div>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label for="city">City: </mat-label>
+        <input matInput id="city" type="text" formControlName="city" />
+      </mat-form-field>
+      <div
+        *ngIf="
+          profileForm.get('address')?.get('city').invalid &&
+          (profileForm.get('address')?.get('city').dirty ||
+            profileForm.get('address')?.get('city').touched)
+        "
+        class="form-error"
+      >
+        <div *ngIf="profileForm.get('address')?.get('city').hasError('required')">
+          City is required.
+        </div>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label for="state">State: </mat-label>
+        <input matInput id="state" type="text" formControlName="state" />
+      </mat-form-field>
+      <div
+        *ngIf="
+          profileForm.get('address')?.get('state').invalid &&
+          (profileForm.get('address')?.get('state').dirty ||
+            profileForm.get('address')?.get('state').touched)
+        "
+        class="form-error"
+      >
+        <div *ngIf="profileForm.get('address')?.get('state').hasError('required')">
+          State is required.
+        </div>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label for="zip">Zip code: </mat-label>
+        <input matInput id="zip" type="text" formControlName="zip" />
+      </mat-form-field>
+      <div
+        *ngIf="
+          profileForm.get('address')?.get('zip').invalid &&
+          (profileForm.get('address')?.get('zip').dirty ||
+            profileForm.get('address')?.get('zip').touched)
+        "
+        class="form-error"
+      >
+        <div *ngIf="profileForm.get('address')?.get('zip').hasError('required')">
+          Zip code is required.
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="favorites">
+      <h2>Favorites</h2>
+      <button
+        type="button"
+        style="margin-bottom: 20px"
+        mat-raised-button
+        color="primary"
+        aria-label="add another favorites"
+        (click)="addFavorites()"
+      >
+        + Add another favorites
+      </button>
+
+      <div class="alias-array">
+        <div *ngFor="let favorite of favorites.controls; let i = index">
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label for="favorite-{{ i }}">Favorite: </mat-label>
+            <input matInput id="favorite-{{ i }}" type="text" [formControlName]="i" />
+            <button
+              type="button"
+              class="remove-btn"
+              mat-icon-button
+              matSuffix
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+              (click)="removeFavorite(i)"
+            >
+              x
+            </button>
+          </mat-form-field>
+          <div *ngIf="favorite.invalid && (favorite.dirty || favorite.touched)" class="form-error">
+            <div *ngIf="favorite.hasError('required')">Favorite is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="notes">
+      <h2>Notes</h2>
+      <button
+        type="button"
+        style="margin-bottom: 20px"
+        mat-raised-button
+        color="primary"
+        aria-label="add another notes"
+        (click)="addNotes()"
+      >
+        + Add another notes
+      </button>
+
+      <div class="alias-array">
+        <div *ngFor="let note of notes.controls; let i = index">
+          <div [formGroupName]="i" class="note-container">
+            <div class="note-container__item note-container__item--first">
+              <mat-form-field appearance="fill">
+                <mat-label for="note">Title: </mat-label>
+                <input matInput id="note" type="text" formControlName="title" />
+                <button
+                  type="button"
+                  class="remove-btn"
+                  mat-icon-button
+                  matSuffix
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                  (click)="removeNote(i)"
+                >
+                  x
+                </button>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  note.get('title').invalid &&
+                  (note.get('title').dirty || note.get('title').touched)
+                "
+                class="form-error"
+              >
+                <div *ngIf="note.get('title').hasError('required')">Title is required</div>
+              </div>
+            </div>
+
+            <div class="note-container__item">
+              <mat-form-field appearance="fill" style="width: 100%">
+                <mat-label for="note">Comment: </mat-label>
+                <input matInput id="comment" type="text" formControlName="comment" />
+                <button
+                  type="button"
+                  class="remove-btn"
+                  mat-icon-button
+                  matSuffix
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                  (click)="removeNote(i)"
+                >
+                  x
+                </button>
+              </mat-form-field>
+              <div
+                *ngIf="
+                  note.get('comment').invalid &&
+                  (note.get('comment').dirty || note.get('comment').touched)
+                "
+                class="form-error"
+              >
+                <div *ngIf="note.get('comment').hasError('required')">Comment is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      style="margin-bottom: 20px"
+      mat-raised-button
+      color="primary"
+      aria-label="Submit button"
+    >
+      Submit
+    </button>
+  </form>
+</div>

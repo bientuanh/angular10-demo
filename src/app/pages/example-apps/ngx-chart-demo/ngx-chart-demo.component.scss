@@ -1,0 +1,45 @@
+.ngx-chart-demo {
+  padding-top: 150px;
+  padding-bottom: 100px;
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vertical-chart {
+    height: 500px;
+    // text-align: center;
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+  }
+
+  .line-chart {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  // .pie-chart {
+  //   height: 500px;
+  //   h2 {
+  //     text-align: center;
+  //   }
+  //   .ngx-charts {
+  //     width: 600px;
+  //   }
+  // }
+}
+
+// .ngx-charts {
+//   margin-bottom: 100px !important;
+// }
+
+.advanced-pie-legend-wrapper {
+  line-height: 2rem !important;
+}

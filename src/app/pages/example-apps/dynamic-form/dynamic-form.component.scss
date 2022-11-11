@@ -1,0 +1,56 @@
+.profile-form-container {
+  display: flex;
+  justify-content: center;
+
+  button[type='submit'] {
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+
+    h1 {
+      font-weight: 900;
+    }
+
+    &__address {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .alias-array {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-error {
+    color: red;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 10px !important;
+  }
+
+  .remove-btn {
+    font-weight: 1.2rem;
+  }
+
+  .note-container {
+    display: flex;
+    width: 100%;
+    &__item {
+      width: 50%;
+      &--first {
+        margin-right: 15px;
+      }
+    }
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+}

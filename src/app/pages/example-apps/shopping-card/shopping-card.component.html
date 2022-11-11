@@ -1,0 +1,16 @@
+<app-shopping-card-header [itemNumbers]="itemNumbers"></app-shopping-card-header>
+
+<app-shopping-card-body
+  [items]="items"
+  (handleRemoveItem)="onClickRemoveItem($event)"
+  (handleChangeQuantity)="onChangeQuantity($event)"
+></app-shopping-card-body>
+
+<app-shopping-card-footer
+  [subTotal]="subTotal"
+  [tax]="tax"
+  [total]="total"
+  [promoMoney]="promoMoney"
+  (handleClickPromoCodeBtnEventEmitter)="onClickPromoCodeBtn($event)"
+  (handleClickCheckOutEventEmitter)="onClickCheckOutBtn()"
+></app-shopping-card-footer>

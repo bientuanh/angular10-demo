@@ -1,0 +1,72 @@
+<div style="padding-top: 100px; padding-bottom: 400px" class="ngx-chart-demo">
+  <div class="ngx-chart-demo--container">
+    <div class="vertical-chart">
+      <div style="display: flex; flex-direction: column">
+        <h2 style="text-align: center">Vertical chart</h2>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          (select)="onSelectVerticalBarChart($event)"
+        >
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+    <div class="line-chart">
+      <div style="display: flex; flex-direction: column">
+        <h2 style="text-align: center">Line chart</h2>
+        <ngx-charts-line-chart
+          [view]="view1"
+          [scheme]="colorScheme1"
+          [legend]="legend1"
+          [showXAxisLabel]="showXAxisLabel1"
+          [showYAxisLabel]="showYAxisLabel1"
+          [xAxis]="xAxis1"
+          [yAxis]="yAxis1"
+          [xAxisLabel]="xAxisLabel1"
+          [yAxisLabel]="yAxisLabel1"
+          [timeline]="timeline1"
+          [results]="multi1"
+          (select)="onSelectLineChart($event)"
+          (activate)="onActivateLineChart($event)"
+          (deactivate)="onDeactivateLineChart($event)"
+        >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+
+    <div class="pie-chart">
+      <div style="display: flex; flex-direction: column">
+        <h2 style="text-align: center">Simple pie chart</h2>
+        <ngx-charts-pie-chart
+          [results]="saleData"
+          [legend]="true"
+          [legendTitle]="'Product Sale Report'"
+          [view]="[1000, 300]"
+          [labels]="true"
+        >
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+
+    <div class="advanced-pie-chart">
+      <div style="display: flex; flex-direction: column; padding-left: 250px; line-height: 2rem">
+        <ngx-charts-advanced-pie-chart [results]="saleData" [gradient]="true" [view]="[1000, 500]">
+        </ngx-charts-advanced-pie-chart>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; padding-left: 200px; line-height: 2rem">
+      <ngx-charts-pie-grid [results]="saleData" [view]="[1000, 500]"> </ngx-charts-pie-grid>
+    </div>
+  </div>
+</div>
